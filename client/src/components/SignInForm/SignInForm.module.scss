@@ -1,0 +1,51 @@
+@import '../../styles/varialbles';
+
+.signInForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+
+	.signInFormTitle {
+		text-align: center;
+		font-size: 2rem;
+		line-height: 1;
+		margin-bottom: 25px;
+	}
+
+	form {
+		width: 400px;
+
+		@media(max-width: $xs) {
+			width: 100%;
+		}
+
+		.signInFormErrors {
+			border: 2px solid $errorColor;
+			border-radius: 4px;
+			padding: 10px;
+			background-color: $errorColor;
+			opacity: 0.8;
+			color: #fff;
+			margin: 0 0 20px;
+		}
+
+		.signInFormButtons {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.signInFormLink {
+			margin-left: 20px;
+
+			a {
+				&:hover {
+					color: $hoverMainColor;
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

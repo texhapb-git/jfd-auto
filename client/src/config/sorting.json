@@ -1,0 +1,44 @@
+[
+	{
+		"id": "date-desc",
+		"title": "По дате размещения",
+		"sort": "dateCreated",
+		"order": "desc"
+	},
+	{
+		"id": "price-asc",
+		"title": "По возрастанию цены",
+		"sort": "price",
+		"order": "asc"
+	},
+	{
+		"id": "price-desc",
+		"title": "По убыванию цены",
+		"sort": "price",
+		"order": "desc"
+	},
+	{
+		"id": "year-desc",
+		"title": "По году: новее",
+		"sort": "year",
+		"order": "desc"
+	},
+	{
+		"id": "year-asc",
+		"title": "По году: старше",
+		"sort": "year",
+		"order": "asc"
+	},
+	{
+		"id": "mileage-asc",
+		"title": "По пробегу",
+		"sort": "mileage",
+		"order": "asc"
+	},
+	{
+		"id": "title-asc",
+		"title": "По названию",
+		"sort": "title",
+		"order": "asc"
+	}
+]

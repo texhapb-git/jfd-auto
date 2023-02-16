@@ -1,0 +1,118 @@
+@import '../../styles/varialbles';
+
+.sortingCarsList {
+	margin: 0 0 20px;
+	display: flex;
+
+	.dropdown {
+		position: relative;
+		width: 320px;
+
+		@media (max-width: $xs) {
+			width: 100%;
+		}
+
+		.dropDownButton {
+			position: relative;
+			display: block;
+			width: 100%;
+			text-align: left;
+
+			background: #FFFFFF;
+			border: 1px solid #d5d5d6;
+			border-radius: 6px;
+			height: 46px;
+
+			padding-top: 13px;
+			padding-bottom: 13px;
+			padding-left: 20px;
+			padding-right: 35px;
+
+			font-weight: 500;
+			font-size: 16px;
+			line-height: 20px;
+
+			cursor: pointer;
+
+			&:focus,
+			&.active {
+				outline: none;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				right: 15px;
+				transform: translateY(-50%);
+
+				/* Рисуем треугольник */
+				width: 0;
+				height: 0;
+				border-width: 10.4px 6px 0 6px;
+				border-color: #a9a9a9 transparent transparent transparent;
+				border-style: solid;
+
+				/* Снимаем клик с треугольника */
+				pointer-events: none;
+			}
+		}
+
+		ul {
+			display: none;
+
+			position: absolute;
+			left: 0;
+			top: 52px;
+
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+
+			background: #FFFFFF;
+			box-shadow: 0px 4px 8px #00000040;
+			overflow: hidden;
+
+			border-radius: 6px;
+			width: 100%;
+
+			z-index: 10;
+
+			&.active {
+				display: block;
+			}
+
+			li {
+				margin: 0;
+				padding: 0;
+				border: 1px solid #d5d5d6;
+				border-bottom: 0px;
+				padding: 13px 20px;
+				cursor: pointer;
+
+				&:first-child {
+					border-radius: 6px 6px 0 0;
+				}
+
+				&:last-child {
+					border-radius: 0 0 6px 6px;
+					border-bottom: 1px solid #d5d5d6;
+				}
+
+				&:hover {
+					background: #d5d5d630;
+				}
+
+				&.active {
+					background: #d5d5d670;
+				}
+
+
+			}
+
+
+		}
+
+
+	}
+}

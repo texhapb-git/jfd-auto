@@ -1,0 +1,114 @@
+@import '../../styles/varialbles';
+
+.radioField {
+	padding: 0;
+	margin: 0 0 1.5rem 0;
+	border: 0;
+	border-radius: $borderRadius;
+	vertical-align: top;
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		-moz-appearance: textfield;
+	}
+
+	.radioFieldContainer {
+		position: relative;
+		border-radius: $borderRadius;
+	}
+
+	.radioFieldLabel {
+		font-size: 1rem;
+		line-height: 1;
+		color: $textColor;
+		margin-left: 15px;
+	}
+
+	&.error .radioFieldLabel {
+		color: $errorColor;
+	}
+
+	ul {
+		column-gap: 8px;
+		display: flex;
+		flex-wrap: wrap;
+		row-gap: 8px;
+		margin-top: 10px;
+
+		@media(max-width: $xs) {
+			&.withImageUl {
+				justify-content: space-between;
+			}
+		}
+
+		li {
+			display: inline-block;
+			max-width: 100%;
+			white-space: nowrap;
+
+			@media(max-width: $md) {
+				max-width: 224px;
+			}
+
+			@media(max-width: $xs) {
+				&.withImageLi {
+					width: 48%;
+					flex: 0 0 48%;
+				}
+			}
+
+			label {
+				display: block;
+				cursor: pointer;
+				white-space: nowrap;
+
+				input {
+					display: none;
+				}
+
+				div {
+					background-color: #fff;
+					border: 1px solid #d5d5d6;
+					border-radius: 0.75rem;
+					box-sizing: border-box;
+					cursor: pointer;
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-end;
+					padding: 12px 24px;
+					text-align: center;
+					transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
+
+					&.withImage {
+						height: 120px;
+
+						@media(max-width: $xs) {
+							height: 100px;
+						}
+					}
+
+					img {
+						max-width: 100%;
+						height: auto;
+						margin-bottom: 7px;
+					}
+				}
+
+				input:checked+div {
+					// background-color: #eef4fa;
+					background-color: $mainColor;
+					border-color: $mainColor;
+					color: #fff;
+				}
+			}
+		}
+	}
+
+	.radioFieldError {
+		color: $errorColor;
+		padding: 7px 0 7px 16px;
+		font-size: 0.75rem;
+		line-height: 1;
+	}
+}

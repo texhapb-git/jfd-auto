@@ -1,0 +1,50 @@
+@import '../../styles/varialbles';
+
+.footer {
+	margin-top: auto;
+	background-color: $footerColor;
+	padding: 1rem 0;
+
+	@media(max-width: $xs) {
+		padding: 1.5rem 0;
+	}
+}
+
+.footerContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@media(max-width: $xs) {
+		flex-direction: column;
+	}
+}
+
+.footerLeft {
+	display: flex;
+	align-items: center;
+}
+
+.footerRight {
+	display: flex;
+	align-items: center;
+}
+
+.footerLogo {
+	margin-right: 50px;
+
+	@media(max-width: $xs) {
+		display: none;
+	}
+}
+
+.footerCopyright {
+	color: #fff;
+	font-size: 0.8rem;
+	line-height: 1;
+	white-space: nowrap;
+
+	@media(max-width: $xs) {
+		margin-top: 1.5rem;
+	}
+}

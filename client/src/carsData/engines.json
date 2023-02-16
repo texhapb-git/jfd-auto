@@ -1,0 +1,22 @@
+[
+	{
+		"id": "ENGINE_GASOLINE",
+		"title": "Бензин",
+		"sort": 100
+	},
+	{
+		"id": "ENGINE_DIESEL",
+		"title": "Дизель",
+		"sort": 200
+	},
+	{
+		"id": "ENGINE_HYBRID",
+		"title": "Гибрид",
+		"sort": 300
+	},
+	{
+		"id": "ENGINE_ELECTRICAL",
+		"title": "Электрический",
+		"sort": 400
+	}
+]

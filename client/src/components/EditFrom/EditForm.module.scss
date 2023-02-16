@@ -1,0 +1,82 @@
+@import '../../styles/varialbles';
+
+.editForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+
+	.editFormTitle {
+		text-align: center;
+		font-size: 2rem;
+		line-height: 1;
+		margin-bottom: 25px;
+	}
+
+	form {
+		width: 760px;
+
+		@media(max-width: $md) {
+			width: 100%;
+		}
+
+		.editFormRow {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 10px;
+
+			@media(max-width: $xs) {
+				flex-wrap: wrap;
+			}
+
+			.editFormCol {
+				width: 375px;
+				flex: 0 0 375px;
+
+				@media(max-width: $md) {
+					width: 340px;
+					flex: 0 0 340px;
+				}
+
+				@media(max-width: $xs) {
+					width: 100%;
+					flex: 0 0 100%;
+				}
+			}
+
+			.editFormColFull {
+				width: 100%;
+				flex: 0 0 100%;
+			}
+		}
+
+		.signUpFormErrors {
+			border: 2px solid $errorColor;
+			border-radius: 4px;
+			padding: 10px;
+			background-color: $errorColor;
+			opacity: 0.8;
+			color: #fff;
+			margin: 0 0 20px;
+		}
+
+		.signUpFormButtons {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.signUpFormLink {
+			margin-left: 20px;
+
+			a {
+				&:hover {
+					color: $hoverMainColor;
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

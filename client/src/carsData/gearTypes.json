@@ -1,0 +1,17 @@
+[
+	{
+		"id": "GEAR_FRONT",
+		"title": "Передний",
+		"sort": 100
+	},
+	{
+		"id": "GEAR_REAR",
+		"title": "Задний",
+		"sort": 200
+	},
+	{
+		"id": "GEAR_FULL",
+		"title": "Полный",
+		"sort": 300
+	}
+]

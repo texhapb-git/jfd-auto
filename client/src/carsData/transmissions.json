@@ -1,0 +1,22 @@
+[
+	{
+		"id": "TRANSMISSION_MECHANICAL",
+		"title": "Механика",
+		"sort": 100
+	},
+	{
+		"id": "TRANSMISSION_AUTOMATIC",
+		"title": "Автомат",
+		"sort": 200
+	},
+	{
+		"id": "TRANSMISSION_ROBOT",
+		"title": "Робот",
+		"sort": 300
+	},
+	{
+		"id": "TRANSMISSION_VARIATOR",
+		"title": "Вариатор",
+		"sort": 400
+	}
+]
