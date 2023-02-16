@@ -40,14 +40,6 @@ export function prepareForDB(car) {
 
 	const updateObj = {};
 
-	if (car?.userId) {
-		updateObj.userId = Number(car.userId);
-	}
-
-	if (car?.dateCreated) {
-		updateObj.dateCreated = Number(car.dateCreated);
-	}
-
 	if (car?.year) {
 		updateObj.year = Number(car.year);
 	}

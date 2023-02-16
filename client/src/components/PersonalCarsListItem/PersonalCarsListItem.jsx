@@ -21,7 +21,7 @@ const PersonalCarsListItem = ({ car }) => {
 
 	car = updateCarValues(car);
 
-	if (!car.id) {
+	if (!car._id) {
 		return null;
 	}
 
@@ -31,7 +31,7 @@ const PersonalCarsListItem = ({ car }) => {
 
 				<div className={styles.carItemListMobileInfo}>
 					<div className={styles.carItemListMobileLink}>
-						<Link to={`/cars/${car.id}`}>{car.title}, {car.year}&nbsp;г.</Link>
+						<Link to={`/cars/${car._id}`}>{car.title}, {car.year}&nbsp;г.</Link>
 					</div>
 
 					<div className={styles.carItemListPrice}>
@@ -42,7 +42,7 @@ const PersonalCarsListItem = ({ car }) => {
 
 				<div className={styles.carItemListThumb}>
 					<div className={styles.carItemListImg} >
-						<Link to={`/cars/${car.id}`}>
+						<Link to={`/cars/${car._id}`}>
 							<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={process.env.PUBLIC_URL + '/upload/cars/1.jpeg'} />
 						</Link>
 					</div>
@@ -53,7 +53,7 @@ const PersonalCarsListItem = ({ car }) => {
 
 					<div className={styles.carItemListDesktopInfo}>
 						<div className={styles.carItemListTitle}>
-							<Link to={`/cars/${car.id}`}>{car.title}, {car.year}&nbsp;г.</Link>
+							<Link to={`/cars/${car._id}`}>{car.title}, {car.year}&nbsp;г.</Link>
 						</div>
 					</div>
 
@@ -90,7 +90,7 @@ const PersonalCarsListItem = ({ car }) => {
 
 				<div className={styles.carItemListButtons}>
 
-					<Link to={`/personal/cars/edit/${car.id}`}>
+					<Link to={`/personal/cars/edit/${car._id}`}>
 						<Button type="none" className={styles.carItemListEditButton}>
 							<SvgIcon name="pencil" />
 						</Button>
@@ -101,7 +101,7 @@ const PersonalCarsListItem = ({ car }) => {
 					</Button>
 
 					<div className={`${styles.carItemListRemoveBlock} ${removing ? styles.active : ''}`} >
-						<Button type="none" className={styles.confirmRemove} onClick={() => dispatch(deletePersonalCar(car.id))}>
+						<Button type="none" className={styles.confirmRemove} onClick={() => dispatch(deletePersonalCar(car._id))}>
 							<SvgIcon name="check" />
 						</Button>
 

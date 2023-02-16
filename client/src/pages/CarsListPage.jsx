@@ -22,9 +22,9 @@ const CarsListPage = () => {
 		const currentSort = sorting.find(sort => sort.id === sortId);
 
 		const params = {
-			'_limit': 30,
-			'_sort': currentSort.sort,
-			'_order': currentSort.order
+			'limit': 30,
+			'sort': currentSort.sort,
+			'order': currentSort.order
 		};
 
 		dispatch(fetchCarsList(params));

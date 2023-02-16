@@ -12,11 +12,11 @@ export const checkAuthUser = createAsyncThunk(
 	`${NAME_SPACE}/checkAuthUser`,
 	async function (_, { rejectWithValue, dispatch }) {
 		try {
-			dispatch(signOut());
+			// dispatch(signOut());
 
 		} catch (error) {
 
-			dispatch(signOut());
+			// dispatch(signOut());
 
 			const { code, message } = error.response.data.error;
 
@@ -84,8 +84,8 @@ export const signUpApp = createAsyncThunk(
 const authSlice = createSlice({
 	name: NAME_SPACE,
 	initialState: {
-		isAuth: false,
-		authUserId: null,
+		isAuth: localStorageService.getUserId() ? true : false,
+		authUserId: localStorageService.getUserId(),
 		authUserInfo: null,
 		authError: null,
 		registerError: null,

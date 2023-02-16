@@ -18,7 +18,6 @@ import gearTypes from '../../carsData/gearTypes.json';
 import transmissions from '../../carsData/transmissions.json';
 import colors from '../../carsData/colors.json';
 
-import { authUserIdSelector } from '../../store/slices/authSlice';
 import { createPersonalCar, updatePersonalCar } from '../../store/slices/personalCarsListSlice.js';
 
 import { schema } from '../../validations/editFormValidation';
@@ -30,8 +29,7 @@ const EditForm = ({ car }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const isEditCar = !!car.id;
-	const userId = useSelector(authUserIdSelector);
+	const isEditCar = !!car._id;
 
 	const {
 		register,
@@ -45,25 +43,22 @@ const EditForm = ({ car }) => {
 	const onFormSubmit = (formData) => {
 
 		if (!isEditCar) {
-			formData.userId = userId;
-			formData.dateCreated = Date.now();
-
 			dispatch(createPersonalCar(formData))
 				.unwrap()
 				.then(response => {
-					if (response.id) {
+					if (response._id) {
 						toast('Объявление создано');
-						navigate(`/personal/cars/edit/${response.id}`);
+						navigate(`/personal/cars/edit/${response._id}`);
 					}
 				})
 				.catch(error => {
 					toast(error, { type: 'error' });
 				});
 		} else {
-			dispatch(updatePersonalCar({ id: car.id, data: formData }))
+			dispatch(updatePersonalCar({ id: car._id, data: formData }))
 				.unwrap()
 				.then(response => {
-					if (response.id) {
+					if (response._id) {
 						toast('Объявление изменено');
 					}
 				})

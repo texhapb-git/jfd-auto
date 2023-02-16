@@ -1,6 +1,6 @@
 import httpService from './http.service';
 
-const carsEndPoint = 'car';
+const carsEndPoint = '/car';
 
 const carsService = {
 	fetch: async (params = {}) => {
@@ -11,27 +11,19 @@ const carsService = {
 		return response;
 	},
 	getCarById: async (carId) => {
-		const response = await httpService.get(
-			carsEndPoint + carId
-		);
+		const response = await httpService.get(carsEndPoint + '/' + carId);
 		return response;
 	},
 	createCar: async (payload) => {
-		const response = httpService.post(
-			carsEndPoint,
-			payload
-		);
+		const response = await httpService.post(carsEndPoint + '/add', payload);
 		return response;
 	},
 	updateCar: async (carId, payload) => {
-		const response = httpService.patch(
-			carsEndPoint + carId,
-			payload
-		);
+		const response = httpService.patch(carsEndPoint + '/edit/' + carId, payload);
 		return response;
 	},
 	deleteCar: async (carId, payload) => {
-		const response = httpService.delete(carsEndPoint + carId);
+		const response = httpService.delete(carsEndPoint + '/delete/' + carId);
 		return response;
 	}
 };

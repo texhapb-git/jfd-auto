@@ -9,7 +9,7 @@ import styles from './CarsListItem.module.scss';
 
 const CarsListItem = ({ type, car }) => {
 
-	if (!car.id) {
+	if (!car._id) {
 		return null;
 	}
 
@@ -17,7 +17,7 @@ const CarsListItem = ({ type, car }) => {
 		return (
 			<div className={styles.carItemFlat}>
 
-				<Link to={`/cars/${car.id}`} className={styles.carItemFlatLink}>
+				<Link to={`/cars/${car._id}`} className={styles.carItemFlatLink}>
 
 					<div className={styles.carItemFlatImg}>
 						<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} src={process.env.PUBLIC_URL + '/upload/cars/1.jpeg'} />
@@ -46,7 +46,7 @@ const CarsListItem = ({ type, car }) => {
 
 					<div className={styles.carItemListMobileInfo}>
 						<div className={styles.carItemListMobileLink}>
-							<Link to={`/cars/${car.id}`}>{car.title}, {car.year}&nbsp;г.</Link>
+							<Link to={`/cars/${car._id}`}>{car.title}, {car.year}&nbsp;г.</Link>
 						</div>
 
 						<div className={styles.carItemListPrice}>
@@ -57,7 +57,7 @@ const CarsListItem = ({ type, car }) => {
 
 					<div className={styles.carItemListThumb}>
 						<div className={styles.carItemListImg} >
-							<Link to={`/cars/${car.id}`}>
+							<Link to={`/cars/${car._id}`}>
 								<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={process.env.PUBLIC_URL + '/upload/cars/1.jpeg'} />
 							</Link>
 						</div>
@@ -68,7 +68,7 @@ const CarsListItem = ({ type, car }) => {
 
 						<div className={styles.carItemListDesktopInfo}>
 							<div className={styles.carItemListTitle}>
-								<Link to={`/cars/${car.id}`}>{car.title} <span> {car.year}&nbsp;г</span></Link>
+								<Link to={`/cars/${car._id}`}>{car.title} <span> {car.year}&nbsp;г</span></Link>
 							</div>
 						</div>
 

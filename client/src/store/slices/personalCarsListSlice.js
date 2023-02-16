@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import carsService from '../../services/cars.service';
 import { prepareForDB } from '../../utils/car';
+import { generateErrors } from '../../utils/generateErrors';
 
 const NAME_SPACE = 'personalCars';
 
@@ -11,30 +12,19 @@ export const fetchPersonalCarsList = createAsyncThunk(
 		try {
 			const response = await carsService.fetch(params);
 
-			if (!response.status === 200) {
-				throw new Error('Server error');
+			if (response.status !== 200) {
+				return rejectWithValue('Server Error');
 			}
 
 			return await response.data;
 		} catch (error) {
-			return rejectWithValue(error.message);
-		}
-	}
-);
+			const { code, message } = error.response.data.error;
 
-export const deletePersonalCar = createAsyncThunk(
-	`${NAME_SPACE}/deletePersonalCar`,
-	async function (id, { rejectWithValue, dispatch }) {
-		try {
-			const response = await carsService.deleteCar(id);
-
-			if (!response.status === 200) {
-				throw new Error('Server error');
+			if (code === 400) {
+				return rejectWithValue(generateErrors(message));
+			} else {
+				return rejectWithValue(error.message);
 			}
-
-			dispatch(removeCar({ id }));
-		} catch (error) {
-			return rejectWithValue(error.message);
 		}
 	}
 );
@@ -45,8 +35,8 @@ export const createPersonalCar = createAsyncThunk(
 		try {
 			const response = await carsService.createCar(prepareForDB(data));
 
-			if (!response.status === 200) {
-				throw new Error('Server error');
+			if (response.status !== 201) {
+				return rejectWithValue('Server Error');
 			}
 
 			const car = response.data;
@@ -55,7 +45,13 @@ export const createPersonalCar = createAsyncThunk(
 
 			return car;
 		} catch (error) {
-			return rejectWithValue(error.message);
+			const { code, message } = error.response.data.error;
+
+			if (code === 400) {
+				return rejectWithValue(generateErrors(message));
+			} else {
+				return rejectWithValue(error.message);
+			}
 		}
 	}
 );
@@ -66,8 +62,8 @@ export const updatePersonalCar = createAsyncThunk(
 		try {
 			const response = await carsService.updateCar(id, prepareForDB(data));
 
-			if (!response.status === 200) {
-				throw new Error('Server error');
+			if (response.status !== 200) {
+				return rejectWithValue('Server Error');
 			}
 
 			const car = response.data;
@@ -76,7 +72,36 @@ export const updatePersonalCar = createAsyncThunk(
 
 			return car;
 		} catch (error) {
-			return rejectWithValue(error.message);
+			const { code, message } = error.response.data.error;
+
+			if (code === 400) {
+				return rejectWithValue(generateErrors(message));
+			} else {
+				return rejectWithValue(error.message);
+			}
+		}
+	}
+);
+
+export const deletePersonalCar = createAsyncThunk(
+	`${NAME_SPACE}/deletePersonalCar`,
+	async function (id, { rejectWithValue, dispatch }) {
+		try {
+			const response = await carsService.deleteCar(id);
+
+			if (response.status !== 204) {
+				return rejectWithValue('Server Error');
+			}
+
+			dispatch(removeCar({ id }));
+		} catch (error) {
+			const { code, message } = error.response.data.error;
+
+			if (code === 400) {
+				return rejectWithValue(generateErrors(message));
+			} else {
+				return rejectWithValue(error.message);
+			}
 		}
 	}
 );
@@ -108,7 +133,7 @@ const personalCarsListSlice = createSlice({
 
 		},
 		removeCar(state, action) {
-			state.list = state.list.filter(car => car.id !== action.payload.id);
+			state.list = state.list.filter(car => car._id !== action.payload.id);
 		},
 	},
 	extraReducers: {
