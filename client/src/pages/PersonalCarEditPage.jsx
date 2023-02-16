@@ -20,13 +20,11 @@ const PersonalCarEditPage = () => {
 
 	const userId = useSelector(authUserIdSelector);
 
-
 	useEffect(() => {
 		setLoading(true);
 
 		(async function () {
 			try {
-
 				const response = await carsService.getCarById(carId);
 
 				if (response.status !== 200) {
@@ -43,6 +41,7 @@ const PersonalCarEditPage = () => {
 				setLoading(false);
 
 			} catch (e) {
+				navigate('/personal/cars');
 				toast(e.message, { type: 'error' });
 			}
 

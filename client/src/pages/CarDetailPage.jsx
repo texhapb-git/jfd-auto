@@ -8,7 +8,6 @@ import { Spinner } from '../components/Spinner';
 
 import { fetchCar, getCarDetailSelector, getCarDetailLoadingSelector, getCarDetailErrorSelector } from '../store/slices/carDetailSlice';
 
-// import cars from '../db/cars.json';
 
 const CarDetailPage = () => {
 	const dispatch = useDispatch();

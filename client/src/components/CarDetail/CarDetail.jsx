@@ -14,6 +14,11 @@ import styles from './CarDetail.module.scss';
 
 
 const CarDetail = ({ car }) => {
+
+	if (!car || Object.keys(car).length === 0) {
+		return <>Обявление не найдено</>;
+	}
+
 	const owner = car.userInfo;
 
 	car = updateCarValues(car);
@@ -61,6 +66,8 @@ const CarDetail = ({ car }) => {
 		}
 
 	];
+
+
 
 	return (
 		<div className={styles.carDetail}>

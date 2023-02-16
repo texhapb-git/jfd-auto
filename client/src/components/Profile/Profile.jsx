@@ -22,10 +22,10 @@ const Profile = () => {
 
 	return (
 		<div className={styles.profile}>
-			{isAuth && userInfo ?
+			{isAuth ?
 				<>
 					<div className={styles.profileName}>
-						<Link to="/personal">{userInfo.firstName}</Link>
+						<Link to="/personal">{userInfo?.firstName}</Link>
 					</div>
 					<div className={styles.profileAvatarBlock}>
 						<Link to="/personal">

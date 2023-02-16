@@ -11,23 +11,11 @@ export const fetchCar = createAsyncThunk(
 		try {
 			const carResponse = await carsService.getCarById(id);
 
-			if (!carResponse.status === 200) {
-				throw new Error('Server error');
+			if (carResponse.status !== 200) {
+				return rejectWithValue('Произошла ошибка на сервере');
 			}
 
-			const car = await carResponse.data;
-
-			const userResponse = await usersService.getUserById(car.userId);
-
-			if (!userResponse.status === 200) {
-				throw new Error('Server error');
-			}
-
-			const user = await userResponse.data;
-
-			car.userInfo = user;
-
-			return car;
+			return carResponse.data;
 		} catch (error) {
 			return rejectWithValue(error.message);
 		}

@@ -23,8 +23,8 @@ const PersonalCarsPage = () => {
 		if (isAuth && userId) {
 			const params = {
 				'userId': userId,
-				'_sort': 'dateCreated',
-				'_order': 'desc'
+				'sort': 'createdAt',
+				'order': 'desc'
 			};
 
 			dispatch(fetchPersonalCarsList(params));

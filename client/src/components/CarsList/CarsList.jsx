@@ -22,11 +22,11 @@ const CarsList = ({ type, title, cars, hideEmpty }) => {
 			{cars.length ?
 				<div className={styles.carList + ' ' + styles[type]}>
 					{cars.map(car => {
-						if (!car.id) {
+						if (!car._id) {
 							return null;
 						}
 
-						return <CarsListItem key={`car-${car.id}`} type={type} car={car} />;
+						return <CarsListItem key={`car-${car._id}`} type={type} car={car} />;
 					})}
 				</div>
 				: <p>Объявлений пока нет.</p>

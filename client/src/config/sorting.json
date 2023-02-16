@@ -2,7 +2,7 @@
 	{
 		"id": "date-desc",
 		"title": "По дате размещения",
-		"sort": "dateCreated",
+		"sort": "createdAt",
 		"order": "desc"
 	},
 	{

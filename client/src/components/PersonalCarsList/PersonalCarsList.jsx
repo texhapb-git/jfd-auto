@@ -7,6 +7,7 @@ import { Button } from '../Button';
 import styles from './PersonalCarsList.module.scss';
 
 const PersonalCarsList = ({ cars }) => {
+
 	return (
 		<div className={styles.carListContainer}>
 			<h1>Мои объявления</h1>
@@ -18,7 +19,7 @@ const PersonalCarsList = ({ cars }) => {
 
 			{cars.length ?
 				<div className={styles.carList}>
-					{cars.map(car => <PersonalCarsListItem key={`car-${car.id}`} car={car} />)}
+					{cars.map(car => <PersonalCarsListItem key={`car-${car._id}`} car={car} />)}
 				</div>
 				: <p>У Вас нет объявлений</p>
 			}

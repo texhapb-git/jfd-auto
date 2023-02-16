@@ -9,15 +9,15 @@ export const fetchLastCars = createAsyncThunk(
 	async function (_, { rejectWithValue }) {
 		try {
 			const params = {
-				'_limit': 6,
-				'_sort': 'dateCreated',
-				'_order': 'desc'
+				'limit': 6,
+				'sort': 'createdAt',
+				'order': 'desc'
 			};
 
 			const response = await carsService.fetch(params);
 
-			if (!response.status === 200) {
-				throw new Error('Server error');
+			if (response.status !== 200) {
+				return rejectWithValue('Произошла ошибка на сервере');
 			}
 
 			return await response.data;

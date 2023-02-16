@@ -11,22 +11,25 @@ const http = axios.create({
 
 http.interceptors.request.use(
 	async function (config) {
-		const expiresDate = localStorageService.getExpiresIn();
-		const refreshToken = localStorageService.getRefreshToken();
-		const isExpired = refreshToken && expiresDate < Date.now();
 
-		if (isExpired) {
-			const response = await authService.refresh();
-			localStorageService.setTokens(response.data);
-		}
+		if (config.url.includes('/car/add') || config.url.indexOf('/car/edit/') >= 0 || config.url.indexOf('/car/delete/') >= 0) {
+			const expiresDate = localStorageService.getExpiresIn();
+			const refreshToken = localStorageService.getRefreshToken();
+			const isExpired = refreshToken && expiresDate < Date.now();
 
-		const accessToken = localStorageService.getAccessToken();
+			if (isExpired) {
+				const response = await authService.refresh();
+				localStorageService.setTokens(response.data);
+			}
 
-		if (accessToken) {
-			config.headers = {
-				...config.headers,
-				Authorization: `Bearer ${accessToken}`
-			};
+			const accessToken = localStorageService.getAccessToken();
+
+			if (accessToken) {
+				config.headers = {
+					...config.headers,
+					Authorization: `Bearer ${accessToken}`
+				};
+			}
 		}
 
 		return config;
