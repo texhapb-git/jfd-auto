@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { TextField } from '../TextField';
 import { RadioField } from '../RadioField';

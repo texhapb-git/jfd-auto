@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import carsService from '../../services/cars.service';
-import usersService from '../../services/users.service';
 
 const NAME_SPACE = 'carDetail';
 

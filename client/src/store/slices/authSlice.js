@@ -12,11 +12,23 @@ export const checkAuthUser = createAsyncThunk(
 	`${NAME_SPACE}/checkAuthUser`,
 	async function (_, { rejectWithValue, dispatch }) {
 		try {
-			// dispatch(signOut());
+			const accessToken = localStorageService.getAccessToken();
+
+			if (accessToken) {
+				const userResponse = await authService.checkAuth();
+
+				if (userResponse.status !== 200) {
+					dispatch(signOut());
+				}
+
+				return userResponse.data;
+			} else {
+				dispatch(signOut());
+			}
 
 		} catch (error) {
 
-			// dispatch(signOut());
+			dispatch(signOut());
 
 			const { code, message } = error.response.data.error;
 
@@ -84,8 +96,8 @@ export const signUpApp = createAsyncThunk(
 const authSlice = createSlice({
 	name: NAME_SPACE,
 	initialState: {
-		isAuth: localStorageService.getUserId() ? true : false,
-		authUserId: localStorageService.getUserId(),
+		isAuth: false,
+		authUserId: null,
 		authUserInfo: null,
 		authError: null,
 		registerError: null,
@@ -111,6 +123,13 @@ const authSlice = createSlice({
 		},
 		[checkAuthUser.fulfilled]: (state, action) => {
 			state.checkingAuth = false;
+
+			if (action?.payload?._id) {
+				state.isAuth = true;
+				state.authUserId = action.payload._id;
+				state.authUserInfo = action.payload;
+			}
+
 		},
 		[checkAuthUser.rejected]: (state, action) => {
 			state.checkingAuth = false;
