@@ -1,9 +1,12 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const tokenService = require('../services/token.service');
 const Token = require('../models/Token');
+
+const auth = require('../middleware/auth.middleware');
 
 const router = express.Router({ mergeParams: true });
 
@@ -146,6 +149,31 @@ router.post('/token', async (req, res) => {
 		await tokenService.save(data._id, tokens.refreshToken);
 
 		res.status(200).send({ ...tokens, userId: data._id });
+	} catch (e) {
+		res.status(500).json({
+			message: 'На сервере произошла ошибка. Попробуйте позже.'
+		});
+	}
+});
+
+router.get('/me', auth, async (req, res) => {
+	try {
+		const token = req.headers.authorization.split(' ')[1];
+		const decoded = jwt.decode(token, { complete: true });
+		const userId = decoded.payload._id;
+
+		const user = await User.findById(userId, { _id: 1, firstName: 1, lastName: 1, email: 1, phone: 1 });
+
+		if (!user) {
+			return res.status(400).json({
+				error: {
+					message: "SERVER_ERROR",
+					code: 400
+				}
+			});
+		}
+
+		res.status(200).send(user);
 	} catch (e) {
 		res.status(500).json({
 			message: 'На сервере произошла ошибка. Попробуйте позже.'

@@ -233,6 +233,7 @@ router.patch('/edit/:id', [
 
 			res.status(200).send(newCar);
 		} catch (e) {
+			console.log(e);
 			res.status(500).json({
 				message: 'На сервере произошла ошибка. Попробуйте позже.'
 			});

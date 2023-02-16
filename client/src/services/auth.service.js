@@ -19,7 +19,10 @@ const authService = {
 			refreshToken: localStorageService.getRefreshToken()
 		});
 		return response;
-
+	},
+	checkAuth: async () => {
+		const response = await httpService.get(authEndPoint + '/me');
+		return response;
 	}
 };
 
