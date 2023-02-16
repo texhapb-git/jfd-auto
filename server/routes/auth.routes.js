@@ -3,12 +3,17 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const tokenService = require('../services/token.service');
+const Token = require('../models/Token');
 
 const router = express.Router({ mergeParams: true });
 
 router.post('/signUp', [
-	// check('email', 'Некорректный email').isEmail(),
-	// check('password', 'Некорректный пароль').isLength({ min: 3 })
+	check('email', 'Некорректный email').exists({ checkFalsy: true }).matches(/^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,20}$/, 'i'),
+	check('password', 'Некорректный пароль').exists({ checkFalsy: true }).matches(/^([^а-яА-Я]*)$/, 'i').matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$/, 'i'),
+	check('passwordConfirm', 'Пароли не совпадают').exists({ checkFalsy: true }).custom((value, { req }) => value === req.body.password),
+	check('firstName', 'Некорректное имя').exists({ checkFalsy: true }).matches(/^([^0-9]*)$/, 'i'),
+	check('lastName', 'Некорректная фамилия').matches(/^([^0-9]*)$/, 'i'),
+	check('phone', 'Некорректный телефон').exists({ checkFalsy: true }).matches(/^([0-9]*)$/, 'i').isLength({ min: 10, max: 10 }),
 ], async (req, res) => {
 	try {
 		const errors = validationResult(req);
@@ -22,17 +27,7 @@ router.post('/signUp', [
 			});
 		}
 
-		const { email, password, confirmPassword, firstName, lastName, phone } = req.body;
-
-		if (password !== confirmPassword) {
-			return res.status(400).json({
-				error: {
-					message: "PASSWORDS_NOT_EQUAL",
-					code: 400
-				}
-			});
-		}
-
+		const { email, password, firstName, lastName, phone } = req.body;
 		const existingUser = await User.findOne({ email });
 
 		if (existingUser) {
@@ -48,7 +43,7 @@ router.post('/signUp', [
 
 		const userData = {
 			firstName: firstName,
-			lastName: lastName,
+			lastName: lastName || '',
 			email: email,
 			password: hashedPassword,
 			phone: phone
@@ -58,7 +53,14 @@ router.post('/signUp', [
 		const tokens = tokenService.generate({ _id: newUser._id });
 		await tokenService.save(newUser._id, tokens.refreshToken);
 
-		res.status(201).send({ ...tokens, userId: newUser._id });
+		const responseUserInfo = {
+			firstName: newUser.firstName,
+			lastName: newUser.lastName,
+			email: newUser.email,
+			phone: newUser.phone
+		}
+
+		res.status(201).send({ ...tokens, userId: newUser._id, userInfo: responseUserInfo });
 
 	} catch (e) {
 		res.status(500).json({
@@ -67,12 +69,88 @@ router.post('/signUp', [
 	}
 });
 
-router.post('/signInWithPassword', async (req, res) => {
+router.post('/signInWithPassword', [
+	check('email', 'Некорректный email').exists({ checkFalsy: true }).matches(/^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,20}$/, 'i'),
+	check('password', 'Пароль не может быть пустым').exists({ checkFalsy: true })
+], async (req, res) => {
+	try {
+		const errors = validationResult(req);
 
+		if (!errors.isEmpty()) {
+			return res.status(400).json({
+				error: {
+					message: "INVALID_DATA",
+					code: 400
+				}
+			});
+		}
+
+		const { email, password } = req.body;
+
+		const existingUser = await User.findOne({ email });
+
+		if (!existingUser) {
+			return res.status(400).json({
+				error: {
+					message: "WRONG_EMAIL_PASSWORD",
+					code: 400
+				}
+			});
+		}
+
+		const isPasswordsEqual = await bcrypt.compare(password, existingUser.password);
+
+		if (!isPasswordsEqual) {
+			return res.status(400).json({
+				error: {
+					message: "WRONG_EMAIL_PASSWORD",
+					code: 400
+				}
+			});
+		}
+
+		const tokens = tokenService.generate({ _id: existingUser._id });
+		await tokenService.save(existingUser._id, tokens.refreshToken);
+
+		const responseUserInfo = {
+			firstName: existingUser.firstName,
+			lastName: existingUser.lastName,
+			email: existingUser.email,
+			phone: existingUser.phone
+		}
+
+		res.status(200).send({ ...tokens, userId: existingUser._id, userInfo: responseUserInfo });
+
+	} catch (e) {
+		res.status(500).json({
+			message: 'На сервере произошла ошибка. Попробуйте позже.'
+		});
+	}
 });
 
-router.post('/token', async (req, res) => {
+function isTokenValid(data, dbToken) {
+	return data && dbToken && data._id === dbToken?.userId?.toString();
+}
 
+router.post('/token', async (req, res) => {
+	try {
+		const { refreshToken } = req.body;
+		const data = tokenService.validateRefresh(refreshToken);
+		const dbToken = await tokenService.findToken(refreshToken);
+
+		if (!isTokenValid(data, dbToken)) {
+			return res.status(401).json({ message: 'Unauthorized' });
+		}
+
+		const tokens = tokenService.generate({ _id: data._id });
+		await tokenService.save(data._id, tokens.refreshToken);
+
+		res.status(200).send({ ...tokens, userId: data._id });
+	} catch (e) {
+		res.status(500).json({
+			message: 'На сервере произошла ошибка. Попробуйте позже.'
+		});
+	}
 });
 
 module.exports = router;

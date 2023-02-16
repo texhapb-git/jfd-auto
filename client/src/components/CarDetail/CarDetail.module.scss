@@ -1,0 +1,219 @@
+@import '../../styles/varialbles';
+
+.carDetail {
+	width: 100%;
+
+	.carDetailBack {
+		margin-bottom: 25px;
+
+		button {
+			span {
+				margin-left: 5px;
+			}
+		}
+	}
+
+	.carDetailTitleContainer {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 30px;
+
+		@media(max-width: $xs) {
+			flex-direction: column;
+		}
+
+		.carDetailTitle {
+			flex: 1 1 auto;
+
+			h1 {
+				font-size: 1.5rem;
+				font-weight: 600;
+				line-height: 1.2;
+				margin: 0 auto 0 0;
+				min-width: 0;
+				overflow: hidden;
+				padding-right: 15px;
+			}
+		}
+
+		.carDetailPrice {
+			margin-left: auto;
+			flex-shrink: 0;
+			font-size: 1.5rem;
+			font-weight: 600;
+			line-height: 1;
+			margin-top: 3px;
+
+			@media(max-width: $xs) {
+				margin-left: 0;
+				margin-top: 15px;
+			}
+
+			span {
+				background-color: #8e63d2;
+				color: #fff;
+				padding: 5px 10px;
+				border-radius: 5px;
+			}
+		}
+	}
+
+	.carDetailInfoBlock {
+		display: flex;
+		gap: 30px;
+
+		@media(max-width: $xs) {
+			flex-direction: column;
+		}
+
+		.carDetailGallery {
+			width: 600px;
+			flex: 0 0 600px;
+
+			@media(max-width: $md) {
+				width: 400px;
+				flex: 0 0 400px;
+			}
+
+			@media(max-width: $xs) {
+				width: 100%;
+				flex: 0 0 100%;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.carDetailParams {
+
+			.carDetailParamsList {
+
+				.carDetailParamsRow {
+					display: flex;
+
+					.carDetailParamsCell {
+						color: $textColorLight;
+						display: block;
+						line-height: 1.3;
+						overflow: hidden;
+						padding: 3px 0;
+						text-overflow: ellipsis;
+
+						&:first-child {
+							flex-shrink: 0;
+							width: 122px;
+						}
+
+						&:last-child {
+							color: $textColor;
+							flex-grow: 1;
+							padding-left: 8px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.carDetailOwnerInfo {
+		padding: 20px;
+		background-color: #f8f8f8;
+		border-radius: 0.75rem;
+		margin-top: 25px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@media(max-width: $xs) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.carDetailOwner {
+			display: flex;
+			align-items: center;
+
+			.carDetailOwnerAvatar {
+				width: 60px;
+				height: 60px;
+				overflow: hidden;
+				border-radius: 50%;
+				aspect-ratio: 1/1;
+				background-color: #f8f8f8;
+				margin-right: 15px;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 50%;
+				}
+			}
+
+			.carDetailOwnerNameBlock {
+				display: flex;
+				flex-direction: column;
+				gap: 2px;
+
+				.carDetailOwnerName {
+					font-size: 1rem;
+					line-height: 1.2;
+					font-weight: 600;
+				}
+
+				.carDetailOwnerCity {
+					font-size: 0.9rem;
+					line-height: 1.2;
+					color: $textColorLight;
+				}
+			}
+		}
+
+		.carDetailOwnerContacts {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			align-items: flex-end;
+
+			@media(max-width: $xs) {
+				margin-left: 75px;
+				align-items: flex-start;
+				gap: 10px;
+				margin-top: 5px;
+			}
+
+			.carDetailOwnerPhone {
+
+				a {
+					font-size: 1.2rem;
+					line-height: 1;
+					font-weight: 600;
+					color: $textColor;
+				}
+			}
+
+			.carDetailOwnerEmail {
+
+				a {
+					font-size: 1rem;
+					line-height: 1;
+					color: $textColor;
+				}
+			}
+		}
+	}
+
+	.carDetailOwnerComment {
+		margin-bottom: 10px;
+
+		div {
+			font-size: 1rem;
+			line-height: 1.3;
+			color: $textColor;
+		}
+	}
+
+
+}

@@ -1,0 +1,57 @@
+@import '../../styles/varialbles';
+
+.profile {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.profileName {
+	font-size: 0.85rem;
+	line-height: 1;
+	white-space: nowrap;
+	margin-right: 10px;
+
+	a {
+		color: $textColor;
+		text-decoration: none;
+	}
+}
+
+.profileAvatarBlock {
+	width: 42px;
+	height: 42px;
+	overflow: hidden;
+	border-radius: 50%;
+	aspect-ratio: 1/1;
+	background-color: #f8f8f8;
+
+	a {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.profileAvatar {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+
+}
+
+.profileLogout {
+	margin-left: 10px;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		stroke: $secondaryColor;
+		cursor: pointer;
+
+		&:hover {
+			stroke: $mainColor;
+		}
+	}
+}

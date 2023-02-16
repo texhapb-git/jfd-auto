@@ -1,0 +1,29 @@
+[
+	{
+		"id": "mobile-link-1",
+		"title": "Главная",
+		"path": "/"
+	},
+	{
+		"id": "mobile-link-2",
+		"title": "О проекте",
+		"path": "/about"
+	},
+	{
+		"id": "mobile-link-3",
+		"title": "Объявления",
+		"path": "/cars"
+	},
+	{
+		"id": "mobilelink-4",
+		"title": "Личный кабинет",
+		"path": "/personal",
+		"auth": true
+	},
+	{
+		"id": "mobile-link-5",
+		"title": "Мои объявления",
+		"path": "/personal/cars",
+		"auth": true
+	}
+]

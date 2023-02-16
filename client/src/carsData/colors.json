@@ -1,0 +1,42 @@
+[
+	{
+		"id": "COLOR_WHITE",
+		"title": "Белый",
+		"sort": 100
+	},
+	{
+		"id": "COLOR_BLACK",
+		"title": "Черный",
+		"sort": 200
+	},
+	{
+		"id": "COLOR_GRAY",
+		"title": "Серый",
+		"sort": 300
+	},
+	{
+		"id": "COLOR_BEIGE",
+		"title": "Бежевый",
+		"sort": 400
+	},
+	{
+		"id": "COLOR_YELLOW",
+		"title": "Желтый",
+		"sort": 500
+	},
+	{
+		"id": "COLOR_RED",
+		"title": "Красный",
+		"sort": 600
+	},
+	{
+		"id": "COLOR_BLUE",
+		"title": "Синий",
+		"sort": 700
+	},
+	{
+		"id": "COLOR_GREEN",
+		"title": "Зеленый",
+		"sort": 800
+	}
+]

@@ -1,0 +1,23 @@
+@import '../../styles/varialbles';
+
+.carListContainer {
+	margin-bottom: 30px;
+
+	.carListButton {
+		margin-bottom: 30px;
+	}
+}
+
+.carList {
+	display: flex;
+	flex: 0 0 100%;
+	max-width: 100%;
+	flex-direction: column;
+	gap: 15px;
+
+	@media(max-width: $xs) {
+		gap: 25px;
+	}
+
+
+}

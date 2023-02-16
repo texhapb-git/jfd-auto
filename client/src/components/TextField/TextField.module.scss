@@ -1,0 +1,187 @@
+@import '../../styles/varialbles';
+
+.inputField {
+	padding: 0;
+	margin: 0 0 1.5rem 0;
+	border: 0;
+	border-radius: $borderRadius;
+	vertical-align: top;
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		-moz-appearance: textfield;
+	}
+
+	.inputFieldContainer {
+		position: relative;
+		border-radius: $borderRadius;
+	}
+
+	label {
+		margin: 0.5rem 0;
+	}
+
+	label span {
+		position: absolute;
+		font-size: 1rem;
+		line-height: 1;
+		left: 0;
+		right: auto;
+		background-color: transparent;
+		color: $textColor;
+		max-width: 100%;
+		z-index: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		padding: 2px 35px 2px 11px;
+		transform: translateY(16px);
+		transition: transform .2s ease-in-out, font-size .2s ease-in-out;
+	}
+
+	&.focused label span {
+		font-size: 0.75rem;
+		line-height: 1;
+		transform: translate(3px, -9px);
+	}
+
+	&.error label span {
+		color: $errorColor;
+	}
+
+	input {
+		display: block;
+		width: 100%;
+		height: 52px;
+		border-radius: 0.75rem;
+		box-sizing: border-box;
+		padding-left: 12px;
+		padding-right: 12px;
+		outline: none;
+		font-weight: normal;
+		font-size: 1rem;
+		color: #2B2D33;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			-moz-appearance: textfield;
+		}
+	}
+
+	textarea {
+		display: block;
+		width: 100%;
+		height: 100px;
+		border-radius: 0.75rem;
+		box-sizing: border-box;
+		padding: 12px 12px;
+		outline: none;
+		font-weight: normal;
+		font-size: 1rem;
+		color: #2B2D33;
+		resize: none;
+	}
+
+	.textFieldHiddenButton {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translate(-40%, -50%);
+		width: 25px;
+		height: 25px;
+
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+
+		&_show {
+			position: absolute;
+			top: 50%;
+			right: 0;
+			transform: translate(-40%, -50%);
+			width: 25px;
+			height: 25px;
+
+			svg {
+				width: 100%;
+				height: 100%;
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				top: 50%;
+				left: 0;
+				transform: rotate(-45deg);
+				background-color: $textColor;
+			}
+		}
+	}
+
+
+	fieldset {
+		text-align: left;
+		position: absolute;
+		inset: -5px 0px 0px;
+		margin: 0px;
+		padding: 0px 8px;
+		pointer-events: none;
+		border-radius: inherit;
+		border-style: solid;
+		border-width: 1px;
+		overflow: hidden;
+		min-width: 0%;
+		border: 1px solid #D5D5D6;
+	}
+
+	&.error fieldset {
+		border-color: $errorColor;
+	}
+
+	legend {
+		float: unset;
+		width: auto;
+		overflow: hidden;
+		display: block;
+		padding: 0;
+		height: 9px;
+		font-size: 0.75em;
+		visibility: hidden;
+		max-width: 0;
+		-webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+		transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+		white-space: nowrap;
+	}
+
+	&.focused legend {
+		max-width: 100%;
+	}
+
+	legend span {
+		padding-left: 5px;
+		padding-right: 5px;
+		display: inline-block;
+		opacity: 0;
+		visibility: visible;
+	}
+
+	.inputFieldError {
+		color: $errorColor;
+		padding: 4px 0 0 11px;
+		font-size: 0.75rem;
+		line-height: 1;
+	}
+
+	.inputFieldComment {
+		color: $textColorLight;
+		padding: 5px 0 0 11px;
+		font-size: 0.75rem;
+		line-height: 1;
+		font-style: italic;
+	}
+}
