@@ -10,6 +10,8 @@ import { formatPhone } from '../../utils/phone';
 
 import { Avatar } from '../Avatar';
 
+import defaultImage from '../../assets/images/default-car.png';
+
 import styles from './CarDetail.module.scss';
 
 
@@ -23,51 +25,17 @@ const CarDetail = ({ car }) => {
 
 	car = updateCarValues(car);
 
-	const images = [
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/1.jpeg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/1.jpeg',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/2.webp',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/2.webp',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/3.jpg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/3.jpg',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/4.jpg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/4.jpg',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/5.jpg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/5.jpg',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/6.jpg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/6.jpg',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/7.jpg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/7.jpg',
-			loading: 'lazy'
-		},
-		{
-			original: process.env.PUBLIC_URL + '/upload/cars/8.jpg',
-			thumbnail: process.env.PUBLIC_URL + '/upload/cars/8.jpg',
-			loading: 'lazy'
-		}
+	const images = [];
 
-	];
-
-
+	if (car?.photos.length) {
+		car.photos.forEach(photo => {
+			images.push({
+				original: process.env.PUBLIC_URL + '/upload/cars/' + photo,
+				thumbnail: process.env.PUBLIC_URL + '/upload/cars/' + photo,
+				loading: 'lazy'
+			});
+		});
+	}
 
 	return (
 		<div className={styles.carDetail}>
@@ -85,7 +53,14 @@ const CarDetail = ({ car }) => {
 			<div className={styles.carDetailInfoBlock}>
 
 				<div className={styles.carDetailGallery}>
-					<ImageGallery items={images} />
+					{images.length ?
+						<ImageGallery items={images} />
+						:
+						<div className={styles.carDetailGalleryDefault}>
+							<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={defaultImage} />
+						</div>
+					}
+
 				</div>
 
 				<div className={styles.carDetailParams}>

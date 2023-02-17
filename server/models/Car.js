@@ -4,6 +4,7 @@ const schema = new Schema({
 	userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 	title: { type: String, required: true },
 	year: { type: Number, required: true },
+	photos: [{ type: String }],
 	bodyType: { type: String, required: true },
 	engine: { type: String, required: true },
 	engineVolume: { type: Number, required: true },

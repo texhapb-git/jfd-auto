@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { updateCarValues } from '../../utils/car';
 import { formatPrice, formatNumber } from '../../utils/numbers';
 
+import defaultImage from '../../assets/images/default-car.png';
+
 import styles from './CarsListItem.module.scss';
 
 
@@ -13,6 +15,8 @@ const CarsListItem = ({ type, car }) => {
 		return null;
 	}
 
+	const carImg = car?.photos[0] ? process.env.PUBLIC_URL + '/upload/cars/' + car.photos[0] : defaultImage;
+
 	if (type === 'flat') {
 		return (
 			<div className={styles.carItemFlat}>
@@ -20,7 +24,7 @@ const CarsListItem = ({ type, car }) => {
 				<Link to={`/cars/${car._id}`} className={styles.carItemFlatLink}>
 
 					<div className={styles.carItemFlatImg}>
-						<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} src={process.env.PUBLIC_URL + '/upload/cars/1.jpeg'} />
+						<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} src={carImg} />
 					</div>
 
 					<div className={styles.carItemFlatContent}>
@@ -58,7 +62,7 @@ const CarsListItem = ({ type, car }) => {
 					<div className={styles.carItemListThumb}>
 						<div className={styles.carItemListImg} >
 							<Link to={`/cars/${car._id}`}>
-								<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={process.env.PUBLIC_URL + '/upload/cars/1.jpeg'} />
+								<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={carImg} />
 							</Link>
 						</div>
 

@@ -123,12 +123,13 @@ router.post('/add', [
 			const decoded = jwt.decode(token, { complete: true });
 			const userId = decoded.payload._id;
 
-			const { title, year, bodyType, engine, engineVolume, enginePower, gearType, transmission, color, mileage, price, city, ownerDescription } = req.body;
+			const { title, year, photos, bodyType, engine, engineVolume, enginePower, gearType, transmission, color, mileage, price, city, ownerDescription } = req.body;
 
 			const carData = {
 				userId: userId,
 				title: title,
 				year: year,
+				photos: photos || [],
 				bodyType: bodyType,
 				engine: engine,
 				engineVolume: engineVolume,
@@ -211,11 +212,12 @@ router.patch('/edit/:id', [
 				});
 			}
 
-			const { title, year, bodyType, engine, engineVolume, enginePower, gearType, transmission, color, mileage, price, city, ownerDescription } = req.body;
+			const { title, year, photos, bodyType, engine, engineVolume, enginePower, gearType, transmission, color, mileage, price, city, ownerDescription } = req.body;
 
 			const carData = {
 				title: title,
 				year: year,
+				photos: photos || [],
 				bodyType: bodyType,
 				engine: engine,
 				engineVolume: engineVolume,

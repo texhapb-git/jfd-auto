@@ -1,0 +1,6 @@
+{
+	"port": 8080,
+	"mongoUri": "mongodb+srv://texhapb:hf0750CYorvicqd4@cluster0.3tiyvx9.mongodb.net/app?retryWrites=true&w=majority",
+	"accessSecret": "JIPaVXFAGYdrCajaL85kdUIj2sqs7b6hKHZKqdhxxVqhA7uHOnZ7cvc1AQDk",
+	"refreshSecret": "PPbq6B7zVTikbDSeiGsdtjKji6mvYaVynOVX13UjoIfaHHLfKmOsRc0p8DY8"
+}
