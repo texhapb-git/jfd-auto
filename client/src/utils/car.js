@@ -34,7 +34,10 @@ export function prepareForDB(car) {
 
 	for (var key in car) {
 		if (car.hasOwnProperty(key)) {
-			car[key] = car[key].trim();
+			if (typeof car[key] === 'string') {
+				car[key] = car[key].trim();
+			}
+
 		}
 	}
 

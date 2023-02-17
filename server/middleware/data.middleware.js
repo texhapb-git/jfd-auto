@@ -7,10 +7,7 @@ function dataPrepare(req, res, next) {
 				if (key === 'email') {
 					req.body[key] = req.body[key].toLowerCase();
 				}
-
-
 			}
-
 		}
 	}
 	next();
