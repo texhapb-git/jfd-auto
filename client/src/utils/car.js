@@ -4,6 +4,8 @@ import engines from '../carsData/engines.json';
 import transmissions from '../carsData/transmissions.json';
 import gearTypes from '../carsData/gearTypes.json';
 
+import { randomInt } from './numbers';
+
 export function updateCarValues(car) {
 	const updateObj = {};
 
@@ -64,4 +66,20 @@ export function prepareForDB(car) {
 	}
 
 	return { ...car, ...updateObj };
+}
+
+export function generatePhotos() {
+	const photos = [
+		'1.jpeg',
+		'2.webp',
+		'3.jpg',
+		'4.jpg',
+		'5.jpg',
+		'6.jpg',
+		'7.jpg',
+		'8.jpg'
+	];
+
+	const shuffled = photos.sort(() => 0.5 - Math.random());
+	return shuffled.slice(0, randomInt(0, shuffled.length));
 }

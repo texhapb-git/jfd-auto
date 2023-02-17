@@ -10,6 +10,8 @@ import { formatPrice, formatNumber } from '../../utils/numbers';
 import { SvgIcon } from '../SvgIcon';
 import { Button } from '../Button';
 
+import defaultImage from '../../assets/images/default-car.png';
+
 import { deletePersonalCar } from '../../store/slices/personalCarsListSlice';
 
 import styles from './PersonalCarsListItem.module.scss';
@@ -24,6 +26,8 @@ const PersonalCarsListItem = ({ car }) => {
 	if (!car._id) {
 		return null;
 	}
+
+	const carImg = car?.photos[0] ? process.env.PUBLIC_URL + '/upload/cars/' + car.photos[0] : defaultImage;
 
 	return (
 		<div className={`${styles.carItemListContainer} ${!removing ? styles.notRemoving : ''}`}>
@@ -43,7 +47,7 @@ const PersonalCarsListItem = ({ car }) => {
 				<div className={styles.carItemListThumb}>
 					<div className={styles.carItemListImg} >
 						<Link to={`/cars/${car._id}`}>
-							<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={process.env.PUBLIC_URL + '/upload/cars/1.jpeg'} />
+							<img loading="lazy" alt={`${car.title}, ${car.year}&nbsp;г.`} title={`${car.title}, ${car.year}&nbsp;г.`} src={carImg} />
 						</Link>
 					</div>
 

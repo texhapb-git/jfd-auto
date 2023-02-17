@@ -22,6 +22,8 @@ import { createPersonalCar, updatePersonalCar } from '../../store/slices/persona
 
 import { schema } from '../../validations/editFormValidation';
 
+import { generatePhotos } from '../../utils/car';
+
 import styles from './EditForm.module.scss';
 
 
@@ -41,6 +43,7 @@ const EditForm = ({ car }) => {
 	});
 
 	const onFormSubmit = (formData) => {
+		formData.photos = generatePhotos();
 
 		if (!isEditCar) {
 			dispatch(createPersonalCar(formData))
