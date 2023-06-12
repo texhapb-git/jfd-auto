@@ -9,7 +9,7 @@ const schema = yup.object().shape({
 	}),
 	bodyType: yup.string().trim().required('Поле обязательно для заполнения'),
 	engine: yup.string().trim().required('Поле обязательно для заполнения'),
-	engineVolume: yup.string().trim().required('Поле обязательно для заполнения').matches(/^(?<=^| )\d+(\.\d+)?(?=$| )$/, 'Поле может содержать только цифры'),
+	engineVolume: yup.string().trim().required('Поле обязательно для заполнения').matches(/^[0-9]+\.[0-9]$/i, 'Поле может содержать только цифры'),
 	enginePower: yup.string().trim().required('Поле обязательно для заполнения').matches(/^([0-9]*)$/, 'Поле может содержать только цифры'),
 	gearType: yup.string().trim().required('Поле обязательно для заполнения'),
 	transmission: yup.string().trim().required('Поле обязательно для заполнения'),
